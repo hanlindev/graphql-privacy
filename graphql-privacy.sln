@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.Privacy", "GraphQL.Privacy\GraphQL.Privacy.csproj", "{F7DD25E2-6B7B-4B42-B73B-F3A38E5D5BDB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.Privacy.Sample", "GraphQL.Privacy.Sample\GraphQL.Privacy.Sample.csproj", "{B51C3AA1-CE06-44A0-A86D-459772605954}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F7DD25E2-6B7B-4B42-B73B-F3A38E5D5BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7DD25E2-6B7B-4B42-B73B-F3A38E5D5BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7DD25E2-6B7B-4B42-B73B-F3A38E5D5BDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B51C3AA1-CE06-44A0-A86D-459772605954}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B51C3AA1-CE06-44A0-A86D-459772605954}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B51C3AA1-CE06-44A0-A86D-459772605954}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B51C3AA1-CE06-44A0-A86D-459772605954}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
