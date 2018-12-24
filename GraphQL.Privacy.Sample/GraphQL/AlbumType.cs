@@ -20,6 +20,7 @@ namespace GraphQL.Privacy.Sample.GraphQL
                         new DenyIfHidden<Album>()));
             Field(album => album.Id);
             Field(album => album.Title);
+            Field(album => album.IsHidden);
             Field(album => album.UserId);
             Field<UserType, User>()
                 .Name("user")

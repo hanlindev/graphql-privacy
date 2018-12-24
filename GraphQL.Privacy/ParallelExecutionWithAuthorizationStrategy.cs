@@ -30,8 +30,16 @@ namespace GraphQL.Privacy
 
         protected override void ValidateNodeResult(ExecutionContext context, ExecutionNode node)
         {
-            var result = this.AuthorizeAsync(context, node).ConfigureAwait(false).GetAwaiter().GetResult();
-            result.PostProcess(context, node).ConfigureAwait(false).GetAwaiter().GetResult();
+            try
+            {
+
+                var result = this.AuthorizeAsync(context, node).ConfigureAwait(false).GetAwaiter().GetResult();
+                result.PostProcess(context, node).ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+            catch (AuthorizationPolicyViolationException err)
+            {
+                throw err;
+            }
         }
     }
 }
