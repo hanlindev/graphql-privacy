@@ -6,17 +6,17 @@ using GraphQL.Types;
 
 namespace GraphQL.Privacy.Policies
 {
-    public class ListItemRequirementListPolicy<T, TNode> : ClaimsPrincipalAuthorizationPolicy<IEnumerable<TNode>>
+    public class ListItemShortCircuitPolicy<T, TNode> : ClaimsPrincipalAuthorizationPolicy<IEnumerable<TNode>>
         where T : ObjectGraphType<TNode>
         where TNode : class
     {
         public IAuthorizationPolicy<TNode> AlternativeNodePolicy { get; set; }
 
-        public ListItemRequirementListPolicy()
+        public ListItemShortCircuitPolicy()
         {
         }
 
-        public ListItemRequirementListPolicy(IAuthorizationPolicy<TNode> alternative)
+        public ListItemShortCircuitPolicy(IAuthorizationPolicy<TNode> alternative)
         {
             AlternativeNodePolicy = alternative;
         }
@@ -64,7 +64,7 @@ namespace GraphQL.Privacy.Policies
 
         public override IAuthorizationPolicy<IEnumerable<TNode>> BuildCopy(ExecutionContext context, ExecutionNode node)
         {
-            var copy = new ListItemRequirementListPolicy<T, TNode>(AlternativeNodePolicy);
+            var copy = new ListItemShortCircuitPolicy<T, TNode>(AlternativeNodePolicy);
             copy.BuildContext(context, node);
             return copy;
         }

@@ -29,7 +29,7 @@ namespace GraphQL.Privacy
         }
 
         public static ConnectionBuilder<T, TSource> AuthorizeWith<T, TNode, TSource>(
-            this ConnectionBuilder<T, TSource> instance, ConnectionRequirementListPolicy<T, TNode, TSource> policy)
+            this ConnectionBuilder<T, TSource> instance, ConnectionShortCircuitPolicy<T, TNode, TSource> policy)
             where T : ObjectGraphType<TNode>
             where TNode : class
         {
@@ -43,9 +43,9 @@ namespace GraphQL.Privacy
             where TNode : class
         {
             instance.AuthorizeWith(
-                new ConnectionRequirementListPolicy<T, TNode, TSource>(
+                new ConnectionShortCircuitPolicy<T, TNode, TSource>(
                     instance, 
-                    new EdgeNodeRequirementListPolicy<T, TNode>()
+                    new EdgeNodeShortCircuitPolicy<T, TNode>()
                 )
             );
             return instance;
@@ -57,7 +57,7 @@ namespace GraphQL.Privacy
             where T : ObjectGraphType<TItem>
         {
             field.AuthorizeWith(
-                new ListItemRequirementListPolicy<T, TItem>()
+                new ListItemShortCircuitPolicy<T, TItem>()
             );
             return field;
         }

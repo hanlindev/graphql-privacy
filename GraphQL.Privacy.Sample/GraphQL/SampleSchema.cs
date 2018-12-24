@@ -7,7 +7,6 @@ namespace GraphQL.Privacy.Sample.GraphQL
         public SampleSchema(SampleQuery query, SampleMutation mutation, IDependencyResolver resolver)
         {
             Query = query;
-            Mutation = mutation;
             DependencyResolver = resolver;
         }
     }

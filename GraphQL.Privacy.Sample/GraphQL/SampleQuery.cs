@@ -12,6 +12,7 @@ namespace GraphQL.Privacy.Sample.GraphQL
         {
             Name = "Query";
             Field<UserQuery>("user", resolve: context => new { });
+            Field<AlbumQuery>("album", resolve: context => new { });
         }
     }
 }

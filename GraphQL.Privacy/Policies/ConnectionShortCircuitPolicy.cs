@@ -11,7 +11,7 @@ using static GraphQL.Execution.ExecutionHelper;
 
 namespace GraphQL.Privacy.Policies
 {
-    public class ConnectionRequirementListPolicy<T, TNode, TSource> : ClaimsPrincipalAuthorizationPolicy<Connection<TNode>>
+    public class ConnectionShortCircuitPolicy<T, TNode, TSource> : ClaimsPrincipalAuthorizationPolicy<Connection<TNode>>
         where T : ObjectGraphType<TNode>
         where TNode : class
     {
@@ -19,7 +19,7 @@ namespace GraphQL.Privacy.Policies
         // If set, the T's rules will not be used but instead use the alternative rules.
         public IAuthorizationPolicy<Edge<TNode>> EdgeNodePolicy { get; set; }
 
-        public ConnectionRequirementListPolicy(ConnectionBuilder<T, TSource> builder, IAuthorizationPolicy<Edge<TNode>> alternative) 
+        public ConnectionShortCircuitPolicy(ConnectionBuilder<T, TSource> builder, IAuthorizationPolicy<Edge<TNode>> alternative) 
         {
             ConnectionBuilder = builder;
             EdgeNodePolicy = alternative;
@@ -90,7 +90,7 @@ namespace GraphQL.Privacy.Policies
 
         public override IAuthorizationPolicy<Connection<TNode>> BuildCopy(ExecutionContext context, ExecutionNode node)
         {
-            var copy = new ConnectionRequirementListPolicy<T, TNode, TSource>(ConnectionBuilder, EdgeNodePolicy);
+            var copy = new ConnectionShortCircuitPolicy<T, TNode, TSource>(ConnectionBuilder, EdgeNodePolicy);
             copy.BuildContext(context, node);
             return copy;
         }

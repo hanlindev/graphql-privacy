@@ -5,7 +5,7 @@ using GraphQL.Execution;
 
 namespace GraphQL.Privacy.Policies
 {
-    public class RequirementListPolicy<T> : ClaimsPrincipalAuthorizationPolicy<T>
+    public class ShortCircuitPolicy<T> : ClaimsPrincipalAuthorizationPolicy<T>
         where T : class
     {
         public IList<IAuthorizationRule<T>> Requirements { get; set; }
@@ -35,7 +35,7 @@ namespace GraphQL.Privacy.Policies
 
         public override IAuthorizationPolicy<T> BuildCopy(ExecutionContext context, ExecutionNode node)
         {
-            var copy = new RequirementListPolicy<T>(){
+            var copy = new ShortCircuitPolicy<T>(){
                 Requirements = Requirements
             };
             copy.BuildContext(context, node);

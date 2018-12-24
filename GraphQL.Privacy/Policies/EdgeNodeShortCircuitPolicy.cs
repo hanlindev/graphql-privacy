@@ -7,7 +7,7 @@ using static GraphQL.Execution.ExecutionHelper;
 
 namespace GraphQL.Privacy.Policies
 {
-    public class EdgeNodeRequirementListPolicy<T, TNode> : ClaimsPrincipalAuthorizationPolicy<Edge<TNode>>
+    public class EdgeNodeShortCircuitPolicy<T, TNode> : ClaimsPrincipalAuthorizationPolicy<Edge<TNode>>
         where T : ObjectGraphType<TNode>
     {
         public override async Task<AuthorizationResult> AuthorizeAsync()
@@ -48,7 +48,7 @@ namespace GraphQL.Privacy.Policies
 
         public override IAuthorizationPolicy<Edge<TNode>> BuildCopy(ExecutionContext context, ExecutionNode node)
         {
-            var copy = new EdgeNodeRequirementListPolicy<T, TNode>();
+            var copy = new EdgeNodeShortCircuitPolicy<T, TNode>();
             copy.BuildContext(context, node);
             return copy;
         }

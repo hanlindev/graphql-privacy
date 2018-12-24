@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GraphQL.Privacy.Sample.Controllers
 {
+    [Route("[controller]")]
     public class GraphQLController : Controller
     {
         private IDocumentExecuter _documentExecuter;

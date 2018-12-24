@@ -16,7 +16,7 @@ namespace GraphQL.Privacy.Sample
                 var claims = new List<Claim>
                 {
                     new Claim(SampleClaims.UserId, "1"),
-                    new Claim(SampleClaims.UserName, "SampleUser"),
+                    new Claim(SampleClaims.UserName, "User1"),
                     new Claim(SampleClaims.Role, Roles.Enduser)
                 };
                 return result;
