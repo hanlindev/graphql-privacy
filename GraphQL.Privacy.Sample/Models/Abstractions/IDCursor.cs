@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace GraphQL.Privacy.Sample.Models.Abstractions
 {
-    public class IDCursor<T> : PagingCursor<ISupportIDCursor, T>
+    public class IDCursorFields : ISupportIDCursor
+    {
+        public long Id { get; set; }
+    }
+
+    public class IDCursor<T> : PagingCursor<IDCursorFields, T>
         where T : ISupportIDCursor
     {
         public override Expression<Func<T, bool>> Comparator => (T instance) => instance.Id > Fields.Id;
@@ -15,7 +20,7 @@ namespace GraphQL.Privacy.Sample.Models.Abstractions
         {
             if (target != null)
             {
-                Fields = target;
+                Fields = new IDCursorFields { Id = target.Id };
             }
         }
     }

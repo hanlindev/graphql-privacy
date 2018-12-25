@@ -24,6 +24,7 @@ namespace GraphQL.Privacy.Sample.GraphQL
                 .Name("allAlbums")
                 .ResolveAsync(ResolveAllAlbums);
             Connection<AlbumType>()
+                // This will filter edges whose nodes are denied access.
                 .AuthorizeConnection<AlbumType, Album, User>()
                 .Name("albums")
                 .ResolveAsync(ResolveAlbumsConnection);
