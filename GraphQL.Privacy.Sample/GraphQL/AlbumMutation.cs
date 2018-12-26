@@ -13,9 +13,10 @@ namespace GraphQL.Privacy.Sample.GraphQL
         public AlbumMutation()
         {
             Field<AlbumType, Album>()
-                // Note: this will fail because EFCore.Sqlite provider does not support ambient transaction.
-                // If you'd like to try mutation privacy, you can change the provider to one that supports
-                // ambient transactions, for example PostgreSQL.
+                // Note: this will fail to prevent the mutation because EFCore.InMemory does not seem to 
+                // support ambient transaction. If you'd like to try mutation privacy, you can change 
+                // the provider to one that supports ambient transactions, for example PostgreSQL.
+                // But still, you won't see the result of the mutation because it's prevented to be shown
                 .AuthorizeWith(new AllowIfViewerIsOwnerOrDenyPolicy<Album>(album => album.UserId))
                 .Name("update")
                 .Argument<AlbumUpdateInputType>("input", "Fields that can be updated on an album")

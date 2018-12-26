@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GraphiQl;
 using GraphQL.DataLoader;
 using GraphQL.Privacy.Sample.GraphQL;
+using GraphQL.Privacy.Sample.Models;
 using GraphQL.Types;
 using GraphQL.Types.Relay;
 using Microsoft.AspNetCore.Builder;
@@ -30,7 +31,7 @@ namespace GraphQL.Privacy.Sample
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddDbContext<SampleDbContext>();
+            services.AddDbContext<SampleDbContext>(o => o.UseInMemoryDatabase("sample"));
             services.AddHttpContextAccessor();
             ConfigureGraphQL(services);
         }

@@ -1,5 +1,6 @@
 ﻿using GraphQL.Privacy.Sample.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace GraphQL.Privacy.Sample
 {
@@ -8,9 +9,15 @@ namespace GraphQL.Privacy.Sample
         public DbSet<User> Users { get; set; }
         public DbSet<Album> Albums { get; set; }
 
+        public SampleDbContext(DbContextOptions<SampleDbContext> options)
+            : base(options)
+        {
+            Database.EnsureCreated();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseSqlite("Data Source=sample.db");
+            //options.UseSqlite("Data Source=sample.db");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
