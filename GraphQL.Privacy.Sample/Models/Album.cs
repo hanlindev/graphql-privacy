@@ -1,6 +1,4 @@
 ﻿using GraphQL.Privacy.Sample.Models.Abstractions;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace GraphQL.Privacy.Sample.Models
 {

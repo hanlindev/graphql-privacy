@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace GraphQL.Privacy.Sample
+namespace GraphQL.Privacy
 {
     public class TypedResolverService<T> : HttpContextResolverService, ITypedResolverService<T> where T : class
     {
@@ -9,7 +9,7 @@ namespace GraphQL.Privacy.Sample
 
         public T Get()
         {
-            return base.Get<T>();
+            return Get<T>();
         }
     }
 }

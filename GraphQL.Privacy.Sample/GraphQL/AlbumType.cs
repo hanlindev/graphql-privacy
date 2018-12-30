@@ -16,8 +16,8 @@ namespace GraphQL.Privacy.Sample.GraphQL
             Name = "Album";
             this.AuthorizeWith(
                 new AllowIfNoRuleDeniesPolicy<Album>(
-                        new AllowIfViewerIsOwnerRule<Album>(album => album.UserId),
-                        new DenyIfHidden<Album>()));
+                    new AllowIfViewerIsOwnerRule<Album>(album => album.UserId),
+                    new DenyIfHidden<Album>()));
             Field(album => album.Id);
             Field(album => album.Title);
             Field(album => album.IsHidden);

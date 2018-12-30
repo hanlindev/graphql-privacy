@@ -15,11 +15,6 @@ namespace GraphQL.Privacy.Sample
             Database.EnsureCreated();
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-            //options.UseSqlite("Data Source=sample.db");
-        }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<User>().HasData(

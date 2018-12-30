@@ -1,17 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GraphiQl;
 using GraphQL.DataLoader;
 using GraphQL.Privacy.Sample.GraphQL;
-using GraphQL.Privacy.Sample.Models;
 using GraphQL.Types;
 using GraphQL.Types.Relay;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,6 +31,7 @@ namespace GraphQL.Privacy.Sample
 
         private void ConfigureGraphQL(IServiceCollection services)
         {
+            services.AddGraphQLPrivacy();
             // Register graphql types here
             services
                 .AddSingleton<PageInfoType>()
@@ -49,12 +43,6 @@ namespace GraphQL.Privacy.Sample
                 .AddSingleton<EdgeType<AlbumType>>()
                 .AddSingleton<UserType>()
                 .AddSingleton<UserQuery>();
-
-            // This is required dependency injection helpers
-            services
-                .AddSingleton<IHttpContextResolverService, HttpContextResolverService>()
-                .AddSingleton(typeof(ITypedResolverService<>), typeof(TypedResolverService<>))
-                .AddSingleton<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
 
             services
                 .AddSingleton<IDataLoaderContextAccessor, DataLoaderContextAccessor>()
