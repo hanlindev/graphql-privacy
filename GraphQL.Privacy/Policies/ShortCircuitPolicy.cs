@@ -8,7 +8,7 @@ namespace GraphQL.Privacy.Policies
     public class ShortCircuitPolicy<T> : ClaimsPrincipalAuthorizationPolicy<T>
         where T : class
     {
-        public IList<IAuthorizationRule<T>> Requirements { get; set; }
+        public IList<IAuthorizationRule<T>> Rules { get; set; }
         public override async Task<AuthorizationResult> AuthorizeAsync()
         {
             if (AuthContext?.Subject == null) 
@@ -29,14 +29,14 @@ namespace GraphQL.Privacy.Policies
 
         protected virtual async Task<IEnumerable<AuthorizationResult>> Evaluate()
         {
-            var tasks = Requirements.Select(requirement => requirement.AuthorizeAsync(AuthContext));
+            var tasks = Rules.Select(rule => rule.AuthorizeAsync(AuthContext));
             return await Task.WhenAll(tasks);
         }
 
         public override IAuthorizationPolicy<T> BuildCopy(ExecutionContext context, ExecutionNode node)
         {
             var copy = new ShortCircuitPolicy<T>(){
-                Requirements = Requirements
+                Rules = Rules
             };
             copy.BuildContext(context, node);
             return copy;

@@ -4,13 +4,13 @@ namespace GraphQL.Privacy
     {
         public Allow(string reason) : base(reason)
         {}
-        public Allow(IAuthorizationRule<T> requirement)
-            : base(GetReason(requirement))
+        public Allow(IAuthorizationRule<T> rule)
+            : base(GetReason(rule))
             {}
 
-        private static string GetReason(IAuthorizationRule<T> requirement)
+        private static string GetReason(IAuthorizationRule<T> rule)
         {
-            return $"Allowed by requirement - {requirement.GetType().Name}";
+            return $"Allowed by requirement - {rule.GetType().Name}";
         }
     }
 }

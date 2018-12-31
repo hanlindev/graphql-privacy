@@ -12,7 +12,7 @@ namespace GraphQL.Privacy.Sample.Privacy
     {
         public DenyIfNoRuleAllowsPolicy(params IAuthorizationRule<T>[] rules)
         {
-            Requirements = rules.ToList().Concat(new List<IAuthorizationRule<T>>
+            Rules = rules.ToList().Concat(new List<IAuthorizationRule<T>>
             {
                 new AlwaysDenyRule<T>()
             }).ToList();

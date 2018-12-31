@@ -15,7 +15,7 @@ namespace GraphQL.Privacy
             if (instance == null) {
                 return "Skipping authorization because subject is null";
             }
-            return $"Skipping authorization for {instance.GetType().Name} because no policy or no requirement returned a decision";
+            return $"Skipping authorization for {instance.GetType().Name} because no policy or no rule returned a decision";
         }
     }
 }
