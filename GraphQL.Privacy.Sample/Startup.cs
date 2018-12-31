@@ -31,7 +31,7 @@ namespace GraphQL.Privacy.Sample
 
         private void ConfigureGraphQL(IServiceCollection services)
         {
-            services.AddGraphQLPrivacy();
+            services.AddGraphQLPrivacy<SampleDbContext>();
             // Register graphql types here
             services
                 .AddSingleton<PageInfoType>()
@@ -39,6 +39,8 @@ namespace GraphQL.Privacy.Sample
                 .AddSingleton<AlbumQuery>()
                 .AddSingleton<AlbumUpdateInputType>()
                 .AddSingleton<AlbumMutation>()
+                .AddSingleton<PhotoType>()
+                .AddSingleton<PhotoQuery>()
                 .AddSingleton<ConnectionType<AlbumType>>()
                 .AddSingleton<EdgeType<AlbumType>>()
                 .AddSingleton<UserType>()

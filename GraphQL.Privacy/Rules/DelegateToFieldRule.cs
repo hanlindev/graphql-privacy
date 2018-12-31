@@ -1,17 +1,14 @@
-﻿using GraphQL.Execution;
-using GraphQL.Types;
-using Microsoft.EntityFrameworkCore;
+﻿using GraphQL.Types;
 using System;
 using System.Threading.Tasks;
 
 namespace GraphQL.Privacy.Rules
 {
-    public class DelegateToFieldRule<T, TModel, TDelegateType, TDelegate, TDelegateID, TDbContext> : IAuthorizationRule<TModel>
+    public class DelegateToFieldRule<T, TModel, TDelegateType, TDelegate, TDelegateID> : IAuthorizationRule<TModel>
         where T : IComplexGraphType
         where TModel : class
         where TDelegateType : ObjectGraphType<TDelegate>
         where TDelegate : class
-        where TDbContext : DbContext
     {
         public T Field { get; private set; }
         public string FieldName { get; private set; }
@@ -39,10 +36,8 @@ namespace GraphQL.Privacy.Rules
             );
 
             var delegateID = IDGetter(authContext.Subject);
-            var delegateResult = await authContext
-                .Resolve<TDbContext>()
-                .Set<TDelegate>()
-                .FindAsync(delegateID);
+            var modelLoader = authContext.Resolve<IModelLoader>();
+            var delegateResult = await modelLoader.FindAsync<TDelegate, TDelegateID>(delegateID);
             delegatedNode.Result = delegateResult;
             var result = await authContext
                 .Resolve<TDelegateType>()
