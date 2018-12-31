@@ -4,7 +4,6 @@ using GraphQL.Builders;
 using GraphQL.Execution;
 using GraphQL.Types;
 using GraphQL.Types.Relay.DataObjects;
-using GraphQL.Privacy.Policies;
 
 namespace GraphQL.Privacy
 {
@@ -27,41 +26,6 @@ namespace GraphQL.Privacy
             instance.FieldType.AuthorizeWith<TReturnType>(policy);
             return instance;
         }
-
-        public static ConnectionBuilder<T, TSource> AuthorizeWith<T, TNode, TSource>(
-            this ConnectionBuilder<T, TSource> instance, ConnectionShortCircuitPolicy<T, TNode, TSource> policy)
-            where T : ObjectGraphType<TNode>
-            where TNode : class
-        {
-            instance.FieldType.AuthorizeWith<Connection<TNode>>(policy);
-            return instance;
-        }
-
-        public static ConnectionBuilder<T, TSource> AuthorizeConnection<T, TNode, TSource>(
-            this ConnectionBuilder<T, TSource> instance)
-            where T : ObjectGraphType<TNode>
-            where TNode : class
-        {
-            instance.AuthorizeWith(
-                new ConnectionShortCircuitPolicy<T, TNode, TSource>(
-                    instance, 
-                    new EdgeNodeShortCircuitPolicy<T, TNode>()
-                )
-            );
-            return instance;
-        }
-
-        public static FieldBuilder<TSource, IEnumerable<TItem>> AuthorizeList<TSource, T, TItem>(
-            this FieldBuilder<TSource, IEnumerable<TItem>> field)
-            where TItem : class
-            where T : ObjectGraphType<TItem>
-        {
-            field.AuthorizeWith(
-                new ListItemShortCircuitPolicy<T, TItem>()
-            );
-            return field;
-        }
-
 
         public static IAuthorizationPolicy<TReturn> GetPolicy<TReturn>(this IProvideMetadata instance)
         {

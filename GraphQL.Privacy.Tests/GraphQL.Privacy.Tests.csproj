@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GraphQL.Privacy.PoliciesAndRules\GraphQL.Privacy.AspNetEFCoreProvider.csproj" />
     <ProjectReference Include="..\GraphQL.Privacy\GraphQL.Privacy.csproj" />
   </ItemGroup>
 
