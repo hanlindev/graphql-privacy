@@ -1,4 +1,6 @@
-﻿using GraphQL.Privacy.Tests.GraphQL;
+﻿using GraphQL.Execution;
+using GraphQL.Language.AST;
+using GraphQL.Privacy.Tests.GraphQL;
 using GraphQL.Types;
 using Microsoft.EntityFrameworkCore;
 using Moq;
@@ -8,9 +10,18 @@ using Xunit;
 
 namespace GraphQL.Privacy.Tests.Rules
 {
-    class DelegateToFieldRuleTestFixture : IDisposable
+    class MockExecutionStrategyHelpers : IExecutionStrategyHelpers
+    {
+        public ExecutionNode BuildExecutionNode(ExecutionNode node, IGraphType resolvedType, Field nodeField, FieldType fieldType)
+        {
+            return new ObjectExecutionNode(node, resolvedType, nodeField, fieldType, new string[] { });
+        }
+    }
+
+    public class DelegateToFieldRuleTestFixture : IDisposable
     {
         public IComplexGraphType PhotoField { get; set; }
+        public IAuthorizationContext<Photo> AuthContext { get; set; }
         public TestDbContext DbContext { get; set; }
         public FieldType AlbumFieldType { get; set; }
         public string FieldName => "album";
@@ -19,14 +30,23 @@ namespace GraphQL.Privacy.Tests.Rules
         public DelegateToFieldRuleTestFixture(AuthorizationResult delegateAuthResult)
         {
             SetupDB();
+            MockAuthContext();
             MockAlbumFieldType();
             MockPhoto();
         }
 
         private void SetupDB()
         {
-            var builder = new DbContextOptions<TestDbContext>();
-            // TODO use sqlite
+            var builder = new DbContextOptionsBuilder<TestDbContext>();
+            builder.UseInMemoryDatabase("test");
+            DbContext = new TestDbContext(builder.Options);
+        }
+
+        private void MockAuthContext()
+        {
+            var mock = new Mock<IAuthorizationContext<Photo>>();
+            mock.Setup(context => context.Resolve<IExecutionStrategyHelpers>()).Returns(new MockExecutionStrategyHelpers());
+            AuthContext = mock.Object;
         }
 
         private void MockAlbumFieldType()
@@ -43,6 +63,7 @@ namespace GraphQL.Privacy.Tests.Rules
 
         public void Dispose()
         {
+            DbContext.Dispose();
         }
     }
 
