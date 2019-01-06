@@ -5,7 +5,7 @@ namespace GraphQL.Privacy.Tests.GraphQL
     public class Photo
     {
         public long Id { get; set; }
-        public long? AlbumId { get; set; }
+        public long AlbumId { get; set; }
         public Album Album { get; set; }
     }
 

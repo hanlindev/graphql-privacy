@@ -7,7 +7,7 @@ namespace GraphQL.Privacy.Rules
     public class DelegateToFieldRule<T, TModel, TDelegateType, TDelegate, TDelegateID> : IAuthorizationRule<TModel>
         where T : IComplexGraphType
         where TModel : class
-        where TDelegateType : ObjectGraphType<TDelegate>
+        where TDelegateType : IComplexGraphType
         where TDelegate : class
     {
         public T Field { get; private set; }
