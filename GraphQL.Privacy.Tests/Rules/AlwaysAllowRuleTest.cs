@@ -3,7 +3,7 @@ using GraphQL.Privacy.Test.GraphQL;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace GraphQL.Privacy.Test.Rules
+namespace GraphQL.Privacy.Tests.Rules
 {
     public class AlwaysAllowRuleTest
     {
