@@ -10,7 +10,6 @@ namespace GraphQL.Privacy.Policies
     {
         public override IViewer GetViewer(ExecutionContext context, ExecutionNode node)
         {
-            var userContext = context.UserContext as IProvideClaimsPrincipal;
             if (context.UserContext is IProvideClaimsPrincipal userContextWithClaimsPrincipal)
             {
                 return new Viewer

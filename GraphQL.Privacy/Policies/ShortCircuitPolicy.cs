@@ -9,6 +9,12 @@ namespace GraphQL.Privacy.Policies
         where T : class
     {
         public IList<IAuthorizationRule<T>> Rules { get; set; }
+
+        public ShortCircuitPolicy(params IAuthorizationRule<T>[] rules)
+        {
+            Rules = rules.ToList();
+        }
+
         public override async Task<AuthorizationResult> AuthorizeAsync()
         {
             if (AuthContext?.Subject == null) 
