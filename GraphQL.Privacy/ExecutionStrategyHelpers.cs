@@ -14,5 +14,10 @@ namespace GraphQL.Privacy
                 nodeField,
                 fieldType);
         }
+
+        public void SetArrayItemNodes(ExecutionContext context, ArrayExecutionNode parent)
+        {
+            ExecutionStrategy.SetArrayItemNodes(context, parent);
+        }
     }
 }

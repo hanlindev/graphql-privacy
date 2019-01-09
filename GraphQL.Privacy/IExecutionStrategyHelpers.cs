@@ -14,5 +14,6 @@ namespace GraphQL.Privacy
             IGraphType resolvedType,
             Field nodeField,
             FieldType fieldType);
+        void SetArrayItemNodes(ExecutionContext context, ArrayExecutionNode parent);
     }
 }

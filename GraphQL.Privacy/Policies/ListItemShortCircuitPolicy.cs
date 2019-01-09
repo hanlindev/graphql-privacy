@@ -29,9 +29,10 @@ namespace GraphQL.Privacy.Policies
             {
                 return new Skip($"Result either null or not correct type for validation by {GetType().Name}");
             }
-            ExecutionStrategy.SetArrayItemNodes(Context, arrayNode);
+            var executionStrategyHelpers = AuthContext.Resolve<IExecutionStrategyHelpers>();
+            executionStrategyHelpers.SetArrayItemNodes(Context, arrayNode);
 
-            var authTasks = arrayNode.Items.Select<ExecutionNode, Task<AuthorizationResult>>(item =>
+            var authTasks = arrayNode.Items.Select(item =>
             {
                 var masterPolicy = item.GraphType.GetPolicy<TNode>() ?? AlternativeNodePolicy;
                 if (masterPolicy == null) {
