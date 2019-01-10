@@ -86,15 +86,15 @@ You will need to implement those interfaces and inject them the same way as that
 
 ## When should you use this library?
 
-You can use this library if your authorization rules require more than just the user's claims. 
-For example, in the Sample project. The `AlbumType` would normally allow any user to see. However
-if one album is disabled, it would only allow the owner to see. You can see that this syntax is
-really flexible and allows very complicated checks.
+You can use this library if your authorization rules depend on the returned objects, i.e. you need
+do post-resolution authorization. For example, in the Sample project. The `AlbumType` would normally 
+allow any user to see. However if one album is disabled, it would only allow the owner to see. You 
+can see that this syntax is really flexible and allows very complicated checks.
 
 In addition, the library treats authorization failure the same way as being not found, i.e. the
 field would return a null. This also applies to list items so you will potentially see null in
 a list. If you want to remove the nulls, you can use the `ListItemShortCircuitPolicy` to
-post-authorize the list items and remove null values. If the field is a `Connection`, you should
+post-process the list items and remove null values. If the field is a `Connection`, you should
 use `ConnectionShortCircuitPolicy`, instead.
 
 ## Future plans
