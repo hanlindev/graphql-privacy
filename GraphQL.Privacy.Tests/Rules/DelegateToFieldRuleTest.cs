@@ -23,6 +23,11 @@ namespace GraphQL.Privacy.Tests.Rules
         {
             return _node;
         }
+
+        public void SetArrayItemNodes(ExecutionContext context, ArrayExecutionNode parent)
+        {
+            // TODO
+        }
     }
 
     class MockModelLoader : IModelLoader

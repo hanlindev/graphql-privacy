@@ -41,6 +41,7 @@ namespace GraphQL.Privacy.Sample
                 .AddSingleton<AlbumMutation>()
                 .AddSingleton<PhotoType>()
                 .AddSingleton<PhotoQuery>()
+                .AddSingleton<PhotoMutation>()
                 .AddSingleton<ConnectionType<AlbumType>>()
                 .AddSingleton<EdgeType<AlbumType>>()
                 .AddSingleton<UserType>()

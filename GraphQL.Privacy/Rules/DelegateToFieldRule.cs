@@ -1,4 +1,5 @@
-﻿using GraphQL.Types;
+﻿using GraphQL.Builders;
+using GraphQL.Types;
 using System;
 using System.Threading.Tasks;
 
@@ -10,23 +11,38 @@ namespace GraphQL.Privacy.Rules
         where TDelegateType : IComplexGraphType
         where TDelegate : class
     {
-        public T Field { get; private set; }
-        public string FieldName { get; private set; }
+        public IComplexGraphType ResolvedType { get; private set; }
+        public string DelegateFieldName { get; private set; }
         public Func<TModel, TDelegateID> IDGetter { get; private set; }
 
         public DelegateToFieldRule(
-            T field,
-            string fieldName,
+            T resolvedType,
+            string delegateFieldName,
             Func<TModel, TDelegateID> idGetter)
         {
-            Field = field;
-            FieldName = fieldName;
+            ResolvedType = resolvedType;
+            DelegateFieldName = delegateFieldName;
+            IDGetter = idGetter;
+        }
+
+        public DelegateToFieldRule(
+            IComplexGraphType graphType,
+            string fieldName,
+            string delegateFieldName,
+            Func<TModel, TDelegateID> idGetter)
+        {
+            ResolvedType = graphType.GetField(fieldName).ResolvedType as IComplexGraphType;
+            if (ResolvedType == null)
+            {
+                throw new Exception($"ResolvedType of an object authorized by {GetType().Name} must be an IComplexGraphType");
+            }
+            DelegateFieldName = fieldName;
             IDGetter = idGetter;
         }
 
         public async Task<AuthorizationResult> AuthorizeAsync(IAuthorizationContext<TModel> authContext)
         {
-            var delegatedFieldType = Field.GetField(FieldName);
+            var delegatedFieldType = ResolvedType.GetField(DelegateFieldName);
             var executionStragyHelpers = authContext.Resolve<IExecutionStrategyHelpers>();
             var delegatedNode = executionStragyHelpers.BuildExecutionNode(
                 authContext.ExecutionNode,

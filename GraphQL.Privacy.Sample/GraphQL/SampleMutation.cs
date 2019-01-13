@@ -12,6 +12,7 @@ namespace GraphQL.Privacy.Sample.GraphQL
         {
             Name = "Mutation";
             Field<AlbumMutation>("album", resolve: context => new { });
+            Field<PhotoMutation>("photo", resolve: context => new { });
         }
     }
 }
