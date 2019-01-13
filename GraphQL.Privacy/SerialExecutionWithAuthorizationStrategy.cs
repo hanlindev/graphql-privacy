@@ -21,13 +21,14 @@ namespace GraphQL.Privacy
             }
             catch (AuthorizationPolicyViolationException)
             {
-                // TODO handle authorization policy violation
                 node.Result = null;
                 return node;
             }
-            catch (Exception)
+            catch (Exception err)
             {
-                throw;
+                node.Result = null;
+                context.Errors.Add(new ExecutionError(err.Message));
+                return node;
             }
         }
 

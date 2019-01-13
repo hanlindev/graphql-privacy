@@ -36,7 +36,7 @@ namespace GraphQL.Privacy.Rules
             {
                 throw new Exception($"ResolvedType of an object authorized by {GetType().Name} must be an IComplexGraphType");
             }
-            DelegateFieldName = fieldName;
+            DelegateFieldName = delegateFieldName;
             IDGetter = idGetter;
         }
 

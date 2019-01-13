@@ -26,7 +26,6 @@ namespace GraphQL.Privacy.Sample.GraphQL
                 .Argument<NonNullGraphType<IntGraphType>>("id", "Id of the photo")
                 .Argument<NonNullGraphType<IntGraphType>>("albumId", "Id of the album this photo belongs to")
                 .ResolveAsync(CreatePhotoAsync);
-            Field<AlbumType, Album>("haha");
         }
 
         private async Task<Photo> CreatePhotoAsync(ResolveFieldContext<object> context)
