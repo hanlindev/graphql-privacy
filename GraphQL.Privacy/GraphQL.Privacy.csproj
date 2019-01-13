@@ -3,6 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <Version>1.0.1</Version>
+    <PackageLicenseUrl>https://github.com/hanlindev/graphql-privacy/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/hanlindev/graphql-privacy</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/hanlindev/graphql-privacy</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Description>Post-resolution privacy check for GraphQL.</Description>
+    <Copyright>2018 Han Lin &lt;hanlin.dev@gmail.com&gt;</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
